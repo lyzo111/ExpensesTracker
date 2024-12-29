@@ -2,13 +2,24 @@ import java.io.File
 
 fun main() {
     val filePath = File("E:/.projects/zzzData")
-    var expenseList = hashMapOf<String, Int>()
+    val expenseList = hashMapOf<String, Int>()
     var sum = 0
 
+    fun printExpenseList() {
+        for (expense in expenseList) {
+            println("${expense.key}: ${expense.value}")
+        }
+        println("Total sum: $sum\n")
+    }
+
     while(true) {
-        println("Describe your expense. Enter 'x' to quit the program.")
-        var description = readLine()
+        println("\nDescribe your expense. Enter 'x' to quit the program.")
+        val description = readlnOrNull()
         var price: Int? = null
+
+        if (description == "") {
+            continue
+        }
 
         if (description!!.lowercase() == "x"){
             break
@@ -16,7 +27,7 @@ fun main() {
 
         while (price == null) {
             println("Enter the price of your expense.")
-            price = readLine()?.toIntOrNull()
+            price = readlnOrNull()?.toIntOrNull()
 
             if (price != null) {
                 break
@@ -29,9 +40,7 @@ fun main() {
             sum += price
         }
 
-        for (expense in expenseList) {
-            println("${expense.key}: ${expense.value}")
-        }
-        println("Total sum: $sum")
+        printExpenseList()
     }
+    printExpenseList()
 }
