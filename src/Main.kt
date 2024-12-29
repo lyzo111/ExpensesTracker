@@ -1,7 +1,13 @@
 import java.io.File
+import org.yaml.snakeyaml.Yaml
 
 fun main() {
-    val filePath = File("E:/.projects/zzzData")
+    // Get file path from yaml file
+    val yaml = Yaml()
+    val inputStream = File("config.yaml").inputStream()
+    val config = yaml.load<Map<String, Any>>(inputStream)
+    val filePath = config["file_path"] as String
+
     val expenseList = hashMapOf<String, Int>()
     var sum = 0
 
